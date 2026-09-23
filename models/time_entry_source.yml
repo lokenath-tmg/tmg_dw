@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: tmg_bronze
+    catalog: workspace
+    schema: tmg
+
+    tables:
+      - name: timesheet_bronze

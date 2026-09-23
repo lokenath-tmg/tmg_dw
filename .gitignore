@@ -1,0 +1,46 @@
+## Ignore Visual Studio SSDT sqlproj specific temporary files, build results, etc
+##
+##
+## Get latest from https://github.com/github/gitignore/blob/master/SSDT-sqlproj.gitignore
+# Build output
+bin/
+obj/
+
+# DACPAC files
+*.dacpac
+
+# Publish profiles (optional, if environment-specific)
+*.publish.xml
+
+# SQL Server debug files
+*.dbmdl
+*.sqlcmdvars
+
+# Visual Studio settings
+.vs/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Backup files
+*.bak
+*.log
+
+
+# Default .gitignore content added by dbt Cloud# you shouldn't commit these into source control
+# these are the default directory names, adjust/add to fit your needs
+target/
+dbt_packages/
+logs/
+# end dbt Cloud content
+dbt_internal_packages/
+
+# Default .gitignore content added by dbt Cloud# you shouldn't commit these into source control
+# these are the default directory names, adjust/add to fit your needs
+target/
+dbt_packages/
+logs/
+# end dbt Cloud content
