@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: keka_project_source
+    database: workspace
+    schema: tmg
+
+    tables:
+      - name: dim_project_billing_bronze
+
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "length(start_date) = 11"
+
+        columns:
+          - name: project_code
+            data_tests:
+              - not_null

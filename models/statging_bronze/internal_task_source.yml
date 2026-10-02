@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: internal_task_source
+    database: workspace
+    schema: tmg
+
+    tables:
+      - name: dim_task_int
+
+
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "length(planned) = 10"
+
+
+        columns:
+          - name: id
+            data_tests:
+              - not_null
+          - name: planned
+            data_tests:
+               - not_null

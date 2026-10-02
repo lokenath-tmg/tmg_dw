@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: rates_source
+    database: workspace
+    schema: tmg
+
+    tables:
+      - name: dim_rates
+
+        columns: 
+          - name: employee_number
+            data_tests:
+              - not_null

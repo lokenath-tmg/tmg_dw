@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: keka_client_source
+    database: workspace
+    schema: tmg
+
+    tables:
+      - name: dim_client_billing_bronze
+
+
+        columns:
+          - name: client_name
+            data_tests:
+              - not_null
+              - unique
