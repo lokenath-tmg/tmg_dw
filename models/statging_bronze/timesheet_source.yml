@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: timesheet_source
+    database: workspace
+    schema: tmg
+
+    tables:
+      - name: fact_timesheet_bronze
+
+        config:
+          freshness:
+            warn_after:
+              count: 9
+              period: day
+          loaded_at_field: "CAST(try_to_date(entry_date, 'dd-MMM-yyyy') AS TIMESTAMP)"
+
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "length(entry_date) = 11"
+
+        columns:
+          - name: entry_date
+            data_tests:
+              - not_null
+
+          - name: employee_number
+            data_tests:
+              - not_null

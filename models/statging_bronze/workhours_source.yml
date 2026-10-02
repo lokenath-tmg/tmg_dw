@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: workhours_source
+    database: workspace
+    schema: tmg
+
+    tables:
+      - name: working_hours_bronze
+        columns:
+          - name: employee_number
+            data_tests:
+              - not_null

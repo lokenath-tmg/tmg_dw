@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: o2d_source
+    database: workspace
+    schema: tmg
+
+    tables:
+      - name: dim_o_2_d
+
+        config:
+          freshness:
+            warn_after:
+              count: 3
+              period: day
+          loaded_at_field: "CAST(try_to_date(left(onboarded_date,10), 'dd/MM/yyyy') AS TIMESTAMP)"
+
+
+        columns:
+          - name: id
+            data_tests:
+              - not_null
+              - unique
+
+          - name: project_lead
+            data_tests:
+               - not_null
