@@ -7,6 +7,7 @@ SELECT
   o2d.spoc AS spoc_doer,
   o2d.project_lead AS project_managers,
   o2d.project_type,
+  o2d.vendor,
   o2d.total_revenue,
   COALESCE(o2d.vendor_cost, 0) AS vendor_cost,
   o2d.first_tranch,

@@ -5,8 +5,6 @@ SELECT
     project_code
   ) AS project_id,
   project_managers,
-  client_name,
-  billing_name,
   client_code,
   try_to_date(start_date, "dd-MMM-yyyy") as start_date,
   try_to_date(end_date, "dd-MMM-yyyy") as end_date,

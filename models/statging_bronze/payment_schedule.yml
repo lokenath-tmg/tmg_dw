@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: payment_schedule_source
+    database: workspace
+    schema: tmg
+
+    tables:
+      - name: payment_schedule
+
+        config:
+          freshness:
+            warn_after:
+              count: 3
+              period: day
+          loaded_at_field: "CAST(try_to_date(left(timestamp,10), 'dd/MM/yyyy') AS TIMESTAMP)"
+
+
+        columns:
+          - name: project_id
+            data_tests:
+              - not_null
