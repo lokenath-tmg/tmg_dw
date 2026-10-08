@@ -6,7 +6,7 @@ sources:
     schema: tmg
 
     tables:
-      - name: dim_project_billing_bronze
+      - name: project_billing_stage
 
         data_tests:
           - dbt_utils.expression_is_true:

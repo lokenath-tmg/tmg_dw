@@ -6,7 +6,7 @@ sources:
     schema: tmg
 
     tables:
-      - name: working_hours_bronze
+      - name: workhours_stage
         columns:
           - name: employee_number
             data_tests:

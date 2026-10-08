@@ -6,7 +6,7 @@ sources:
     schema: tmg
 
     tables:
-      - name: dim_task_int
+      - name: task_internal_stage
 
 
         data_tests:

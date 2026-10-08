@@ -6,7 +6,7 @@ sources:
     schema: tmg
 
     tables:
-      - name: dim_client_billing_bronze
+      - name: client_billing_stage
 
 
         columns:

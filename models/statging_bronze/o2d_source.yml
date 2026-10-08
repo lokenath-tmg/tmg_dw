@@ -6,7 +6,7 @@ sources:
     schema: tmg
 
     tables:
-      - name: dim_o_2_d
+      - name: o2d_stage
 
         config:
           freshness:
