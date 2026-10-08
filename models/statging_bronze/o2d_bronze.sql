@@ -26,6 +26,7 @@ SELECT
   o2d.client_phone,
   o2d.group,
   o2d.city,
-  o2d.sow
+  o2d.sow,
+  o2d.attached_proposal
 FROM
   {{ source( 'o2d_source','dim_o_2_d' )}} AS o2d
