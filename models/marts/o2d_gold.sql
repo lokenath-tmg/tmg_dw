@@ -109,7 +109,7 @@ SELECT
     o2d.practice,
     o2d.crm_update,
     o2d.pc_update,
-    o2d.total_revenue,
+    o2d.total_revenue as project_value,
     o2d.vendor_cost,
 
     tasks.estimated_hours,

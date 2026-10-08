@@ -52,6 +52,7 @@ WITH payment_schedule AS (
 SELECT
     o2d.onboarded,
     o2d.project_id,
+    o2d.client_name,
     o2d.lead_name,
     o2d.client_email,
     o2d.client_phone,
