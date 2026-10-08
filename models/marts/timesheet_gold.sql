@@ -24,7 +24,7 @@ SELECT
   tms.comments,
   r.hourly_rate,
   tmhrs.total_timesheet_hrs,
-  
+
   COALESCE(
     (
       TRY_DIVIDE(
@@ -36,7 +36,12 @@ SELECT
     ) / NULLIF(tmhrs.total_timesheet_hrs, 0),
     0
   ) AS hourly_payable_rate,
-(r.monthly_salary/180) as 180hrs_rate
+(r.monthly_salary/180) as 180hrs_rate,
+
+concat_ws("-", "W", weekofyear(tms.entry_date), year(tms.entry_date)) as week_year,
+concat_ws("-", MONTHNAME(tms.entry_date), year(tms.entry_date)) as month_year,
+concat_ws("-", "Q", QUARTER(tms.entry_date), year(tms.entry_date)) as quarter_year
+
 FROM {{ ref('timesheet_bronze') }} AS tms
 
 LEFT JOIN {{ ref('rates_bronze') }} AS r
