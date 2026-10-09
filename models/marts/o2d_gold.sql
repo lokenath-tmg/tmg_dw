@@ -147,3 +147,5 @@ LEFT JOIN {{ ref('keka_client_bronze') }} AS kcl
 
 LEFT JOIN internal_tasks
     ON o2d.project_id = internal_tasks.project_id
+
+where o2d.status != "Cancelled or Paused"
