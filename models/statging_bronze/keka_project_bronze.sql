@@ -17,4 +17,4 @@ SELECT
   project_income,
   overall_budget
 FROM 
-   {{source('keka_project_source','dim_project_billing_bronze')}}
+   {{source('keka_project_source','project_billing_stage')}}

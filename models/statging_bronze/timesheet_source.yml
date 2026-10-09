@@ -6,7 +6,8 @@ sources:
     schema: tmg
 
     tables:
-      - name: timesheet_stage
+      - name: fact_timesheet_bronze
+        identifier: timesheet_stage
 
         config:
           freshness:

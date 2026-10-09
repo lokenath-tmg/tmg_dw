@@ -29,4 +29,4 @@ SELECT
   o2d.sow,
   o2d.attached_proposal
 FROM
-  {{ source( 'o2d_source','dim_o_2_d' )}} AS o2d
+  {{ source( 'o2d_source','o2d_stage' )}} AS o2d

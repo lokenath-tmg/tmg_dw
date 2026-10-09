@@ -13,4 +13,4 @@ SELECT
   concat_ws("-", "W", weekofyear(TRY_TO_DATE(tsk.planned, 'dd/MM/yyyy')), year(TRY_TO_DATE(tsk.planned, 'dd/MM/yyyy'))) as week_year,
   concat_ws("-", MONTHNAME(TRY_TO_DATE(tsk.planned, 'dd/MM/yyyy')), year(TRY_TO_DATE(tsk.planned, 'dd/MM/yyyy'))) as month_year,
   concat_ws("-", "Q", QUARTER(TRY_TO_DATE(tsk.planned, 'dd/MM/yyyy')), year(TRY_TO_DATE(tsk.planned, 'dd/MM/yyyy'))) as quarter_year
-from {{source('internal_task_source','dim_task_int')}}  as tsk
+from {{source('internal_task_source','task_internal_stage')}}  as tsk
