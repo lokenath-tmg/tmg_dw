@@ -14,4 +14,4 @@ SELECT
   try_to_date(tsk.end_date, 'dd-MMM-yyyy') AS end_date,
   -- Fix 1 & 2: Use TRY_CAST and match the decimal fallback (0.0)
   COALESCE(TRY_CAST(tsk.estimated_hours AS FLOAT), 0.0) AS estimated_hours
-FROM {{source("keka_task_source","dim_task_info_bronze")}} as tsk
+FROM {{source("keka_task_source","task_info_stage")}} as tsk

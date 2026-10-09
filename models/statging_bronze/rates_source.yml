@@ -6,7 +6,8 @@ sources:
     schema: tmg
 
     tables:
-      - name: rates_stage
+      - name: dim_rates
+        identifier: rates_stage
 
         columns: 
           - name: employee_number

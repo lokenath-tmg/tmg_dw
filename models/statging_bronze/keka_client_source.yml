@@ -7,9 +7,9 @@ sources:
 
     tables:
       - name: client_billing_stage
-
-
-        columns:
+        identifier: client_billing_stage  # 👈 Aligned here. Points to the new DB table name.
+        
+        columns: # 👈 Aligned here.
           - name: client_name
             data_tests:
               - not_null

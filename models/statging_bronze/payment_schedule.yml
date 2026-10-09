@@ -6,7 +6,8 @@ sources:
     schema: tmg
 
     tables:
-      - name: payment_schedule_stage
+      - name: payment_schedule
+        identifier: payment_schedule_stage
 
         config:
           freshness:
