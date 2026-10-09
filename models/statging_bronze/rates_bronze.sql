@@ -1,8 +1,9 @@
 SELECT 
+ employee_number,
  employee_name,
  hourly_rate,
- employee_number,
  effective_date,
+ LEAD (effective_date) OVER (PARTITION BY employee_number ORDER BY effective_date) AS next_effective_date,
  mock_salary,
 round((mock_salary/12)) AS monthly_salary
 from {{source('rates_source','dim_rates')}}

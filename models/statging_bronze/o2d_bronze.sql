@@ -7,6 +7,7 @@ SELECT
   o2d.spoc AS spoc_doer,
   o2d.project_lead AS project_managers,
   o2d.project_type,
+  o2d.vendor,
   o2d.total_revenue,
   COALESCE(o2d.vendor_cost, 0) AS vendor_cost,
   o2d.first_tranch,
@@ -25,6 +26,7 @@ SELECT
   o2d.client_phone,
   o2d.group,
   o2d.city,
-  o2d.sow
+  o2d.sow,
+  o2d.attached_proposal
 FROM
   {{ source( 'o2d_source','dim_o_2_d' )}} AS o2d

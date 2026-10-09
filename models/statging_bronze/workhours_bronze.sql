@@ -19,6 +19,6 @@ CAST(COALESCE(TRY_CAST(REGEXP_REPLACE(total_overtime_hours, '^([0-9]+)\\.([0-9]{
 CAST(COALESCE(TRY_CAST(REGEXP_REPLACE(total_short_hours_effective, '^([0-9]+)\\.([0-9]{2})\\.[0-9]{2}$', '$1.$2') AS DOUBLE), 0.0) AS DECIMAL(10,2)) AS total_short_hours_effective,
 CAST(COALESCE(TRY_CAST(REGEXP_REPLACE(total_short_hours_gross, '^([0-9]+)\\.([0-9]{2})\\.[0-9]{2}$', '$1.$2') AS DOUBLE), 0.0) AS DECIMAL(10,2)) AS total_short_hours_gross,
 CONCAT_WS('-', MONTHNAME(TRY_TO_DATE(`month`, 'MMMM,yyyy')), YEAR(TRY_TO_DATE(`month`, 'MMMM,yyyy'))) AS month_year,
-concat_ws("-", "W", weekofyear(TRY_TO_DATE(`month`, 'MMMM,yyyy')), year(TRY_TO_DATE(`month`, 'MMMM,yyyy'))) AS week_year
+concat_ws("-", "Q", QUARTER(TRY_TO_DATE(`month`, 'MMMM,yyyy')), year(TRY_TO_DATE(`month`, 'MMMM,yyyy'))) as quarter_year
 FROM
   {{source('workhours_source','working_hours_bronze')}}
