@@ -1,11 +1,13 @@
 SELECT 
     tsk.project_id,
     tsk.task_id,
-    tsk.spoc_doer,
+    tsk.employee_number,
+    tsk.employee_name,
     tsk.start_date,
     tsk.end_date,
     tsk.billing_type,
     tsk.estimated_hours,
+    tsk.task_status,
     SUM(tms.total_hours) as Actual_Hours,
     r.monthly_salary,
     (r.monthly_salary / 180) * tsk.estimated_hours AS 180hrs_estimated_budget_mock,
@@ -21,7 +23,7 @@ SELECT
 FROM {{ ref('Keka_task_bronze') }} AS tsk
 
 LEFT JOIN {{ ref('rates_bronze') }} AS r
-    ON LOWER(REPLACE(tsk.spoc_doer," ","")) = LOWER(REPLACE(r.employee_name," ",""))
+    ON tsk.employee_number = r.employee_number
     AND tsk.start_date >= r.effective_date
     AND (
         tsk.start_date < r.next_effective_date
@@ -34,10 +36,12 @@ LEFT JOIN {{ ref('timesheet_gold') }} AS tms
 GROUP BY
     tsk.project_id,
     tsk.task_id,
-    tsk.spoc_doer,
+    tsk.employee_name,
+    tsk.employee_number,
     tsk.start_date,
     tsk.end_date,
     tsk.billing_type,
     tsk.estimated_hours,
     r.monthly_salary,
-    r.hourly_rate
+    r.hourly_rate,
+    tsk.task_status

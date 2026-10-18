@@ -55,31 +55,31 @@ internal_tasks AS (
 
         COUNT(
             CASE
-                WHEN actual_status = 'Completed with delay'
+                WHEN task_status = 'Completed with delay'
                 THEN task_id
             END
         ) AS Delayed_task,
 
         COUNT(
             CASE
-                WHEN actual_status = 'Completed on time'
+                WHEN task_status = 'Completed on time'
                 THEN task_id
             END
         ) AS Ontime_task,
 
         COUNT(
             CASE
-                WHEN actual_status = 'Upcoming'
+                WHEN task_status = 'Upcoming'
                 THEN task_id
             END
-        ) AS Pending,
+        ) AS Pending_task,
 
         COUNT(
             CASE
-                WHEN actual_status = 'Overdue'
+                WHEN task_status = 'Overdue'
                 THEN task_id
             END
-        ) AS Overdue
+        ) AS Overdue_task
 
     FROM {{ ref('internal_task_bronze') }}
 
@@ -99,12 +99,10 @@ SELECT
     o2d.spoc_doer,
     o2d.project_managers,
     o2d.project_type,
-    o2d.first_tranch,
     o2d.planned_completion,
     o2d.actual_completion,
     o2d.status,
     o2d.unit,
-    o2d.first_tranch_date,
     o2d.source,
     o2d.practice,
     o2d.crm_update,
@@ -128,8 +126,8 @@ SELECT
 
     internal_tasks.Delayed_task,
     internal_tasks.Ontime_task,
-    internal_tasks.Pending,
-    internal_tasks.Overdue
+    internal_tasks.Pending_task,
+    internal_tasks.Overdue_task
 
 FROM {{ ref('o2d_bronze') }} AS o2d
 
