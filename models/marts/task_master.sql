@@ -16,31 +16,36 @@ WITH keka_tasks AS (
         CAST(NULL AS STRING) AS completion_attachment,
         tg.estimated_hours AS estimated_hours,
         tg.Actual_Hours AS Actual_Hours,
-        tg.`180hrs_estimated_budget_mock` AS `180hrs_estimated_budget_mock`,
+        tg.`180hrs_estimated_budget_mock`
+            AS `180hrs_estimated_budget_mock`,
         tg.fixed_rate_estimated_budget AS fixed_rate_estimated_budget,
         tg.actual_cost AS actual_cost,
         tg.mock_actual_cost AS mock_actual_cost,
         tg.mock_180hrs_cost AS mock_180hrs_cost,
+
         CONCAT_WS(
             '-',
             'W',
             WEEKOFYEAR(CAST(tg.end_date AS DATE)),
             YEAR(CAST(tg.end_date AS DATE))
         ) AS week_year,
+
         CONCAT_WS(
             '-',
             MONTHNAME(CAST(tg.end_date AS DATE)),
             YEAR(CAST(tg.end_date AS DATE))
         ) AS month_year,
+
         CONCAT_WS(
             '-',
             'Q',
             QUARTER(CAST(tg.end_date AS DATE)),
             YEAR(CAST(tg.end_date AS DATE))
         ) AS quarter_year,
+
         'keka' AS task_source,
         tg.task_status AS task_status,
-        Null as remarks
+        CAST(NULL AS STRING) AS remarks
 
     FROM {{ ref('task_gold') }} AS tg
 
@@ -82,7 +87,7 @@ internal_tasks AS (
         itb.quarter_year AS quarter_year,
         'internal' AS task_source,
         itb.task_status AS task_status,
-        itb.remarks as remarks
+        itb.remarks AS remarks
 
     FROM {{ ref('internal_task_bronze') }} AS itb
 
@@ -97,13 +102,34 @@ all_tasks AS (
     UNION ALL
 
     SELECT * FROM internal_tasks
+),
+
+employee_mapping AS (
+
+    SELECT DISTINCT
+        REPLACE(
+            LOWER(TRIM(employee_name)),
+            ' ',
+            ''
+        ) AS employee_key,
+
+        employee_number
+
+    FROM {{ ref('workhours_gold') }}
+
+    WHERE employee_name IS NOT NULL
+      AND employee_number IS NOT NULL
 )
 
 SELECT
     t.*,
-    wrkhrs.employee_number
+    em.employee_number
+
 FROM all_tasks AS t
 
-LEFT JOIN {{ ref('workhours_gold') }} AS wrkhrs
-    ON REPLACE(LOWER(t.spoc_doer), ' ', '')
-     = REPLACE(LOWER(wrkhrs.employee_name), ' ', '')
+LEFT JOIN employee_mapping AS em
+    ON REPLACE(
+        LOWER(TRIM(t.spoc_doer)),
+        ' ',
+        ''
+    ) = em.employee_key
