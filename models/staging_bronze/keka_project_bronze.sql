@@ -1,7 +1,7 @@
 SELECT
   project_name,
   COALESCE(
-    NULLIF(regexp_extract(project_name, r'([A-Z]{3}\d{4})', 1), ''),
+    NULLIF(regexp_extract(project_name, r'([A-Z]{4}\d{4})', 1), ''),
     project_code
   ) AS project_id,
   project_managers,

@@ -31,7 +31,7 @@ cte2 AS (
         tsk.client_name,
         tsk.project_name,
         COALESCE(
-            NULLIF(regexp_extract(tsk.project_name, r'([A-Z]{3}\d{4})', 1), ''),
+            NULLIF(regexp_extract(tsk.project_name, r'([A-Z]{4}\d{4})', 1), ''),
             tsk.project_code
         ) AS project_id,
         tsk.task,
