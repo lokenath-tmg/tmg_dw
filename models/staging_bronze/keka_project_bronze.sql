@@ -15,7 +15,7 @@ SELECT
   est_billing_amount,
   budgeted_time,
   project_income,
-  overall_budget
+  overall_budget,
   client_name,
   billing_name,
   project_status,
