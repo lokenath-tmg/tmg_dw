@@ -8,7 +8,7 @@ SELECT
     tms.client_code,
     tms.project_name,
     COALESCE(
-        NULLIF(REGEXP_EXTRACT(tms.project_name, r'([A-Z]{4}\d{4})', 1), ''), 
+        NULLIF(regexp_extract(project_name, r'- \(([A-Z0-9]+)\)', 1), ''), 
         tms.project_code
     ) AS project_id,
     tms.task,

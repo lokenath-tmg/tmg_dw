@@ -1,7 +1,7 @@
 SELECT
   project_name,
   COALESCE(
-    NULLIF(regexp_extract(project_name, r'([A-Z]{4}\d{4})', 1), ''),
+    NULLIF(regexp_extract(project_name, r'- \(([A-Z0-9]+)\)', 1), ''),
     project_code
   ) AS project_id,
   project_managers,
@@ -16,5 +16,10 @@ SELECT
   budgeted_time,
   project_income,
   overall_budget
+  client_name,
+  billing_name,
+  project_status,
+  billing_model,
+  project_state
 FROM 
    {{source('keka_project_source','project_billing_stage')}}
